@@ -23,11 +23,14 @@ if __name__ == "__main__":
     experiment_config.sampling_device = "cuda"
     experiment_config.train_device = "cuda"
     experiment_config.buffer_device = "cuda"
+    experiment_config.checkpoint_at_end = True
+    experiment_config.checkpoint_interval = 50 * experiment_config.off_policy_collected_frames_per_batch
     # experiment_config.render = True
 
     # Loads from "benchmarl/conf/task/vmas/balance.yaml"
     task = VmasTask.BALANCE.get_from_yaml()
     task.render_mode = "human"  # Ensure the task is set to render in human mode
+    # task.max_steps(300)
 
     # Loads from "benchmarl/conf/algorithm/mappo.yaml"
     algorithm_config = MappoConfig.get_from_yaml()
