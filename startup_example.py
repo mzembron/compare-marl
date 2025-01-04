@@ -14,11 +14,16 @@ if __name__ == "__main__":
     else:
         print("CUDA is available.")
 
+    # If installed with conda, the benchmarl sources are under:
+    # /home/shared/miniconda3/envs/<env-name>/lib/python<version>/site-packages/benchmarl
+    # eg. /home/shared/miniconda3/envs/marl-py-3-11/lib/python3.11/site-packages/benchmarl
+
     # Loads from "benchmarl/conf/experiment/base_experiment.yaml"
     experiment_config = ExperimentConfig.get_from_yaml()
     experiment_config.sampling_device = "cuda"
     experiment_config.train_device = "cuda"
     experiment_config.buffer_device = "cuda"
+    # experiment_config.render = True
 
     # Loads from "benchmarl/conf/task/vmas/balance.yaml"
     task = VmasTask.BALANCE.get_from_yaml()
@@ -42,4 +47,4 @@ if __name__ == "__main__":
     experiment.run()
 
     # Render the task interactively
-    render_interactively(task)
+    # render_interactively(task)
